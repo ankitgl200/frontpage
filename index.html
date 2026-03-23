@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Assignment Front Page Generator</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             font-family: Arial;
             text-align: center;
+            margin: 0;
+            padding: 0;
         }
 
         canvas {
@@ -22,68 +28,93 @@
             margin: 10px;
             padding: 10px;
         }
+
+        footer {
+            width: 100%;
+            margin-top: 30px;
+            padding: 5px;
+            background: #333;
+            color: white;
+        }
+
+        footer h3 {
+            margin: 5px;
+        }
+
+        footer p {
+            margin: 3px;
+        }
     </style>
 </head>
+
 <body>
 
-<h2>Front Page Generator</h2>
+    <h2>Front Page Generator</h2>
 
-<!-- Form -->
-<input type="text" id="name" placeholder="Enter Name"><br>
-<input type="text" id="branch" placeholder="Enter Branch"><br>
-<input type="text" id="subject" placeholder="Enter Subject"><br>
-<input type="text" id="teacher" placeholder="Teacher Name"><br>
-<input type="text" id="roll" placeholder="Roll No"><br>
+    <!-- Form -->
+    <input type="text" id="name" placeholder="Enter Name"><br>
+    <input type="text" id="branch" placeholder="Enter Branch"><br>
+    <input type="text" id="subject" placeholder="Enter Subject"><br>
+    <input type="text" id="teacher" placeholder="Teacher Name"><br>
+    <input type="text" id="roll" placeholder="Roll No"><br>
 
-<button onclick="generate()">Generate</button>
-<button onclick="download()">Download</button>
+    <button onclick="generate()">Generate</button>
+    <button onclick="download()">Download</button>
 
-<br>
+    <br>
 
-<canvas id="canvas" width="794" height="1123"></canvas>
+    <canvas id="canvas" width="794" height="1123"></canvas>
 
-<script>
-let canvas = document.getElementById("canvas");
-let ctx = canvas.getContext("2d");
+    <footer>
+        <h3>Front Page Generator</h3>
+        <p>Create your assignment cover easily</p>
+        <p>Made with ❤️ Using HTML/CSS/JS</p>
+    </footer>
 
-// Load your image here
-let img = new Image();
-img.src = "frontpage.png"; // 🔥 put your image name here
+    
 
-img.onload = function() {
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-}
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+
+        // Load your image here
+        let img = new Image();
+        img.src = "frontpage.png"; // 🔥 put your image name here
+
+        img.onload = function () {
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        }
 
 
+        function generate() {
+            // redraw image
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-function generate() {
-    // redraw image
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            let name = document.getElementById("name").value;
+            let branch = document.getElementById("branch").value;
+            let subject = document.getElementById("subject").value;
+            let teacher = document.getElementById("teacher").value;
+            let roll = document.getElementById("roll").value;
 
-    let name = document.getElementById("name").value;
-    let branch = document.getElementById("branch").value;
-    let subject = document.getElementById("subject").value;
-    let teacher = document.getElementById("teacher").value;
-    let roll = document.getElementById("roll").value;
+            ctx.font = "bold 23px Arial";
+            ctx.fillStyle = "black";
 
-    ctx.font = "bold 23px Arial";
-    ctx.fillStyle = "black";
+            // Adjust positions according to your image
+            ctx.fillText(name, 410, 782);
+            ctx.fillText(branch, 410, 829);
+            ctx.fillText(subject, 235, 645);
+            ctx.fillText(teacher, 410, 917);
+            ctx.fillText(roll, 410, 872);
+        }
 
-    // Adjust positions according to your image
-    ctx.fillText( name, 410, 782);
-    ctx.fillText( branch, 410, 829);
-    ctx.fillText( subject, 235, 645);
-    ctx.fillText( teacher, 410, 917);
-    ctx.fillText( roll, 410, 872);
-}
-
-function download() {
-    let link = document.createElement('a');
-    link.download = 'frontpage.png';
-    link.href = canvas.toDataURL();
-    link.click();
-}
-</script>
+        function download() {
+            let link = document.createElement('a');
+            link.download = 'frontpage.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+    </script>
 
 </body>
+
 </html>
